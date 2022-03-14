@@ -1,0 +1,15 @@
+{
+  "houses": [
+    {
+      "name": "kk",
+      "ownerName": "AK",
+      "address": "234",
+      "areaCode": "567575",
+      "rent": "3000",
+      "bachelor": "on",
+      "married": "",
+      "image": "hjhk",
+      "id": 1
+    }
+  ]
+}

@@ -1,8 +1,9 @@
+import "./AddHouse.css";
 import { useState } from "react";
-
+import axios from "axios";
 
 export const AddHouse = () => {
-  const [userdata, setuserdata] = useState({
+  const [house, sethouse] = useState({
     name: "",
     ownerName: "",
     address: "",
@@ -10,51 +11,168 @@ export const AddHouse = () => {
     rent: "",
     bachelor: "",
     married: "",
-    image: "",
+    image: ""
   });
 
-  const [housedata, sethousedata] = useState([]);
-
-  const handleinput = (e) => {
-    const {id,value} = e.target;
-    setuserdata({...userdata, [id]:value});
-
-
+  const houseData = (e) => {
+    const { className, value } = e.target;
+    sethouse({ ...house, [className]: value });
   };
 
-const handlesubmit = (e) => {
- e.preventDefault();
-}
+  const houseHandle
+    = (e) => {
+      e.preventDefault();
+      axios.post("http://localhost:8080/houses", house).then((res) => {
+        console.log("houseDetails ", res.data);
+      });
+      sethouse({
+        name: "",
+        ownerName: "",
+        address: "",
+        areaCode: "",
+        rent: "",
+        bachelor: "",
+        married: "",
+        image: ""
+      });
+    };
   return (
     <div className="addHouseContainer">
-      <form>
-        <label>name</label>
-        <input type="text" className="name" value={""} required />
-        <br />
-        <label>ownerName</label>
-        <input value={""} type="text" className="ownerName" required />
-        <br />
-        <label>address</label>
-        <input value={""} type="text" className="address" required />
-        <br />
-        <label>areaCode</label>
-        <input value={""} type="text" className="areaCode" required />
-        <br />
-        <label>rent</label>
-        <input value={""} type="text" className="rent" required />
-        <br />
-        <label>preferredTenant</label>
-        <br />
-        <label>bachelor</label>
-        <input checked={""} type="checkbox" className="bachelor" />
-        <br />
-        <label>married</label>
-        <input checked={""} type="checkbox" className="married" />
-        <br />
-        <label>image</label>
-        <input value={""} type="text" className="image" required />
-        <br />
-        <input className="submitBtn" type="submit" />
+      <form
+        onSubmit={(e) => {
+          houseHandle
+            (e);
+        }}
+      >
+        <table>
+          <tbody>
+            <td>
+              <label>name</label>
+            </td>
+            <td>
+              <input
+                type="text"
+                onChange={(e) => {
+                  houseData(e);
+                }}
+                className="name"
+                value={house.name}
+                required
+              />
+            </td>
+
+            <td>
+              <label>ownerName</label>
+            </td>
+            <td>
+              <input
+                value={house.ownerName}
+                type="text"
+                onChange={(e) => {
+                  houseData(e);
+                }}
+                className="ownerName"
+                required
+              /> <br />
+            </td>
+
+            <td>
+              <label>address</label>
+            </td>
+            <td>
+              <input
+                value={house.address}
+                type="text"
+                onChange={(e) => {
+                  houseData(e);
+                }}
+                className="address"
+                required
+              />
+            </td>
+
+            <td>
+              <label>areaCode</label>
+            </td>
+            <td>
+              <input
+                value={house.areaCode}
+                type="text"
+                onChange={(e) => {
+                  houseData(e);
+                }}
+                className="areaCode"
+                required
+              />
+            </td>
+
+            <td>
+              <label>rent</label>
+            </td>
+            <td>
+              <input
+                value={house.rent}
+                type="text"
+                onChange={(e) => {
+                  houseData(e);
+                }}
+                className="rent"
+                required
+              />
+            </td>
+
+            <td>
+              <label>preferredTenant</label>
+            </td>
+
+            <td>
+              <label>bachelor</label>
+            </td>
+            <td>
+              <input
+                checked={house.bachelor}
+                onChange={(e) => {
+                  houseData(e);
+                }}
+                type="checkbox"
+                className="bachelor"
+              />
+            </td>
+
+            <td>
+              <label>married</label>
+            </td>
+            <td>
+              <input
+                checked={house.married}
+                onChange={(e) => {
+                  houseData(e);
+                }}
+                type="checkbox"
+                className="married"
+              />
+            </td>
+
+            <td>
+              <label>image</label>
+            </td>
+            <td>
+              <input
+                value={house.image}
+                type="text"
+                onChange={(e) => {
+                  houseData(e);
+                }}
+                className="image"
+                required
+              />
+            </td>
+
+            <td>
+              <input className="submitBtn" type="submit" />
+            </td>
+          </tbody>
+        </table>
       </form>
     </div>
   );

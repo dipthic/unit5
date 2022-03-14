@@ -3,6 +3,9 @@ import { Rentals } from "./Components/Rentals/Rentals";
 import { AddHouse } from "./Components/AddHouse/AddHouse";
 import { useState } from "react";
 
+
+// house details
+
 function App() {
   const [userData, setuserData] = useState(false);
   return (
